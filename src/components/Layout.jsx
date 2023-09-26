@@ -4,8 +4,10 @@ import Header from "./Header";
 export default function Layout() {
   return (
     <>
-      <Header />
-      <Outlet />
+      <div className="p-4 flex flex-col min-h-screen">
+        <Header />
+        <Outlet />
+      </div>
     </>
   );
 }
