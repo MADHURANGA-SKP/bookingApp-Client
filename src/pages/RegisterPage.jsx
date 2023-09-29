@@ -47,7 +47,7 @@ export default function RegisterPage() {
           <div className="text-center py-2 text-gray-500 ">
             Allready a member .?
             <Link
-              to={"/loging"}
+              to={"/login"}
               className="underline font-semibold text-black px-2"
             >
               Login
