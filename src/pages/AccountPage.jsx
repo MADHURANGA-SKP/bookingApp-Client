@@ -1,9 +1,13 @@
 import { useContext } from "react";
 import { UserContext } from "../UserContext";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 
 export default function AccountPage() {
-  const { ready, user, useParams } = useContext(UserContext);
+  const { ready, user } = useContext(UserContext);
+  let { subpage } = useParams();
+  if (subpage === undefined) {
+    subpage = "profile";
+  }
 
   if (!ready) {
     return "Loading ...";
@@ -13,25 +17,24 @@ export default function AccountPage() {
     return <Navigate to={"/login"} />;
   }
 
+  function linkClasss(type = null) {
+    let classes = "py-2 px-6";
+    if (type === subpage) {
+      classes += " bg-primary text-white rounded-full";
+    }
+    return classes;
+  }
+
   return (
     <div>
       <nav className="w-full flex justify-center mt-8 gap-4">
-        <Link
-          className="py-2 px-4 bg-primary text-white rounded-full"
-          to={"/account"}
-        >
+        <Link className={linkClasss("profile")} to={"/account"}>
           My Profile
         </Link>
-        <Link
-          className="py-2 px-4 bg-gray-300 rounded-full"
-          to={"/account/bookings"}
-        >
+        <Link className={linkClasss("booking")} to={"/account/booking"}>
           My Bookings
         </Link>
-        <Link
-          className="py-2 px-4 bg-gray-300 rounded-full"
-          to={"/account/accommadation"}
-        >
+        <Link className={linkClasss("places")} to={"/account/places"}>
           My accommadation
         </Link>
       </nav>
