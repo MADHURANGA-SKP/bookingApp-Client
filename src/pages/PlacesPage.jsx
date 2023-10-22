@@ -104,10 +104,18 @@ export default function PlacesPage() {
                   Add&nbsp;Photos
                 </button>
               </div>
-              <div className="mt-2 grid grid-cols-3 md:grid-cols-s lg-grid-cols-6">
+              <div className="mt-2 grid gap-2 grid-cols-3 md:grid-cols-s lg-grid-cols-6">
                 {addedPhotos.length > 0 &&
-                  addedPhotos.map((link) => <div>{link}</div>)}
-                <button className="flex justify-center gap-2 border bg-transparent rounded-2xl p-8 text-2xl text-gray-600">
+                  addedPhotos.map((link) => (
+                    <div>
+                      <img
+                        className="rounded-2xl"
+                        src={"http://localhost:4000/uploads/" + link}
+                        alt=""
+                      />
+                    </div>
+                  ))}
+                <button className="flex justify-center gap-2 border bg-transparent rounded-2xl items-center p-2 text-2xl text-gray-600">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
