@@ -1,11 +1,12 @@
 import PhotosUploader from "../PhotosUploder";
 import Perks from "../Perks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AccountNav from "../AccountNav";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 export default function PlacesFormPage() {
+  const { id } = useParams();
   const [title, setTitle] = useState("");
   const [address, setAddress] = useState("");
   const [addedPhotos, setAddedPhotos] = useState("");
@@ -17,6 +18,23 @@ export default function PlacesFormPage() {
   const [maxGuests, setMaxGuests] = useState("1");
   const [redirect, setRedirect] = useState(false);
 
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    axios.get("/places/" + id).then((response) => {
+      const { data } = response;
+      setTitle(data.title);
+      setAddress(data.address);
+      setAddedPhotos(data.photos);
+      setDescription(data.description);
+      setPerks(data.perks);
+      setExtraInfo(data.extraInfo);
+      setCheckIn(data.checkIn);
+      setCheckOut(data.checkOut);
+      setMaxGuests(data.maxGuests);
+    });
+  }, [id]);
   function inputHeader(text) {
     return <h2 className="text-2xl mt-4">{text}</h2>;
   }
@@ -31,9 +49,9 @@ export default function PlacesFormPage() {
       </>
     );
   }
-  async function addNewPlace(ev) {
+  async function savePlace(ev) {
     ev.preventDefault();
-    await axios.post("/places", {
+    const placeData = {
       title,
       address,
       addedPhotos,
@@ -43,8 +61,17 @@ export default function PlacesFormPage() {
       checkIn,
       checkOut,
       maxGuests,
-    });
-    setRedirect(true);
+    };
+    if (id) {
+      await axios.put("/places", {
+        id,
+        ...placeData,
+      });
+      setRedirect(true);
+    } else {
+      await axios.post("/places", placeData);
+      setRedirect(true);
+    }
   }
 
   if (redirect) {
@@ -54,7 +81,7 @@ export default function PlacesFormPage() {
   return (
     <div>
       <AccountNav />
-      <form onSubmit={addNewPlace}>
+      <form onSubmit={savePlace}>
         {preInput(
           "Title",
           "Title for your place. Shoud be short and catchy as an advertisment"
@@ -82,7 +109,7 @@ export default function PlacesFormPage() {
         {preInput("Perks", "Select all desierd items for your place")}
 
         <div className="grid gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
-          <Perks />
+          <Perks selected={perks} onChange={setPerks} />
         </div>
         {preInput("Extra Info", "House, Rules and other.")}
 
