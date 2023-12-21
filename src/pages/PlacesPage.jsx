@@ -45,7 +45,7 @@ export default function PlacesPage() {
                 to={"/account/places/" + place._id}
                 className="flex cursor-pointer gap-4 bg-gray-200 p-4 rounded-2xl"
               >
-                <div className="flex w-32 h-32 bg-gray-300 ">
+                <div className="flex w-32 h-32 bg-gray-300 grow shrink-0">
                   {place.photos.length > 0 && (
                     <img
                       className="object-cover"
