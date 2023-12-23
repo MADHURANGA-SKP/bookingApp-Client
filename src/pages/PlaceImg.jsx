@@ -3,7 +3,7 @@ export default function PlaceImg({ place, index = 0, className }) {
     return "";
   }
   if (!className) {
-    className = "object-cover";
+    className = "object-cover rounded-2xl aspect-square w-48";
   }
   return (
     <div className="">
