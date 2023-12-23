@@ -26,4 +26,12 @@ Welcome to the Fullstack Booking App! This web application allows users to book 
 ![Sample Image](./ss-03.png)
 ![Sample Image](./ss-04.png)
 ![Sample Image](./ss-05.png)
+![Sample Image](./ss-06.png)
+![Sample Image](./ss-07.png)
+![Sample Image](./ss-08.png)
+![Sample Image](./ss-09.png)
+![Sample Image](./ss-10.png)
+![Sample Image](./ss-11.png)
+![Sample Image](./ss-12.png)
+![Sample Image](./ss-13.png)
 
