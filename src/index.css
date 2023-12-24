@@ -11,6 +11,10 @@ textarea {
   @apply w-full border my-2 py-2 px-3 rounded-2xl;
 }
 
+body {
+  font-family: "Poppins", sans-serif;
+}
+
 textarea {
   height: 140px;
 }
