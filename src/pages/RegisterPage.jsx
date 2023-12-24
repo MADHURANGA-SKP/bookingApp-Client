@@ -27,7 +27,7 @@ export default function RegisterPage() {
         <form className="max-w-md mx-auto " onSubmit={registerUser}>
           <input
             type="text"
-            placeholder="jone doe"
+            placeholder="your name"
             value={name}
             onChange={(ev) => setName(ev.target.value)}
           />
